@@ -141,13 +141,14 @@ exports.create_sale = function(req, res) {
         sms
           .sendsms(newdata.total, newdata.discount, newdata.phone_number)
           .then(succ => {
-            return res.json({ status: 200, message: 'succes', data: doc });
+            return res.json({ status: 200, message: 'succes', data: newdata });
           })
           .catch(err => {
+            console.log('error in message ', err)
             return res.json({
               status: 200,
               message: 'Message sending failed',
-              data: doc,
+              data: newdata,
             });
           });
       });

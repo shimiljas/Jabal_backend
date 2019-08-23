@@ -9,14 +9,16 @@ exports.sendsms = (total, discount, mobile) => {
       reject({ message: 'break' });
     }, 3000);
 
-    let message = `Hi , You have compeleted a purchasing of ₹ ${total} and there will be discount of ₹ ${discount} on next purchase`;
-
+    let message = discount > 0 ? `Hi , You have compeleted a purchasing of ₹${total} and there will be discount of ₹${discount} on next purchase` : 'You have completed a purchase of ₹12 for every ₹1000 get a discount of ₹30,Thank you';
+    let phoneNo = `+91${mobile}`;
     client.messages
-      .create({ body: message, from: '+91963389851', to: mobile })
+      .create({ body: message, from: '+13343986955', to: phoneNo})
       .then(message => {
+        console.log('success', message)
         resolve(message);
       })
       .catch(err => {
+        console.log('twilio', err)
         reject(err);
       });
   });
