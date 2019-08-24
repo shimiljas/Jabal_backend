@@ -8,5 +8,7 @@ var customer = require('../controllers/customer');
 
 router.post('/sale/new', customer.create_sale);
 router.post('/sale/search', customer.search);
+router.post('/sale/limit', customer.offerlimit);
+router.get('/fetch/limit', customer.fetchLatestLimit);
 
 module.exports = router;
