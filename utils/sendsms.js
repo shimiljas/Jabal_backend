@@ -32,6 +32,12 @@ exports.sendsms = (total, discount, mobile) => {
 
 exports.sendbytextlocal = (total, discount, mobile) => {
   return new Promise(function(resolve, reject) {
+    console.log(
+      total,
+      discount,
+      mobile,
+      'total, discount, mobile)total, discount, mobile)',
+    );
     setTimeout(function() {
       reject({ message: 'break' });
     }, 5000);
@@ -70,6 +76,7 @@ exports.sendbytextlocal = (total, discount, mobile) => {
         str += chunk;
       }); //the whole response has been recieved, so we just print it out here
       response.on('end', function() {
+        console.log('succcc');
         resolve(message);
       });
     }; //console.log('hello js'))

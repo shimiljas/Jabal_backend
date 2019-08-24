@@ -9,12 +9,7 @@ var LimitFetch = require('../utils/fetchLimit');
 //import AWS from "aws-sdk";
 exports.create_sale = function(req, res) {
   LimitFetch.fetchLimit()
-    .then(offerDataValue => {
-      let offerData =
-        offerDataValue && offerData.limit
-          ? offerDataValue
-          : { limit: 1000, discount: 30 };
-
+    .then(offerData => {
       var saleData = req.body ? req.body : {};
       if (!saleData.phone_number) {
         return res.json({ status: 400, message: 'Phone number is missing' });
@@ -156,9 +151,11 @@ exports.create_sale = function(req, res) {
             discount: mulitple == 0 ? 0 : mulitple * offerData.discount,
             sales: [{ price: saleData.price, date: new Date() }],
           });
+          console.log('dfsdfsdfsdf-------<>');
           newcustomer.save(function(err, newdata) {
-            if (err)
+            if (err) {
               return res.json({ status: 400, message: 'somethimg wnet wrong' });
+            }
             sms
               .sendbytextlocal(
                 newdata.total,
@@ -185,7 +182,7 @@ exports.create_sale = function(req, res) {
       });
     })
     .catch(err => {
-      return res.json({ status: 400, message: 'Current price is missing' });
+      return res.json({ status: 400, message: err });
     });
 };
 
@@ -224,6 +221,7 @@ exports.fetchLatestLimit = function(req, res) {
       if (res) return res.json({ status: 200, data: offerDataValue });
     })
     .catch(err => {
+      console.log(err, 'sdfsdf');
       if (err)
         return res.json({ status: 400, message: 'somethimg wnet wrong' });
     });
