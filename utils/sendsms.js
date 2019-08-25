@@ -44,7 +44,7 @@ exports.sendbytextlocal = (total, discount, mobile) => {
 
     let message =
       discount > 0
-        ? `Hi , You have compeleted a purchasing of ${total}.00 and there will be discount of ${discount}.00 on next purchase`
+        ? `Hi , You have compeleted a purchasing of total ${total}.00 from Jabal Mini Market  and there will be discount of ${discount}.00 on next purchase`
         : 'You have completed a purchase of  12.00  for every 1000 get a discount of  30.00,Thank you';
 
     console.log(message, 'message');

@@ -62,7 +62,7 @@ exports.create_sale = function(req, res) {
                     message: err,
                   });
                 sms
-                  .sendbytextlocal(sum, doc.discount, saleData.phone_number)
+                  .sendbytextlocal(saleData.price, doc.discount, saleData.phone_number)
                   .then(succ => {
                     return res.json({
                       status: 200,
@@ -122,7 +122,7 @@ exports.create_sale = function(req, res) {
                   });
                 sms
                   .sendbytextlocal(
-                    updated.total,
+                    saleData.price,
                     updated.discount,
                     updated.phone_number,
                   )
@@ -151,14 +151,13 @@ exports.create_sale = function(req, res) {
             discount: mulitple == 0 ? 0 : mulitple * offerData.discount,
             sales: [{ price: saleData.price, date: new Date() }],
           });
-          console.log('dfsdfsdfsdf-------<>');
           newcustomer.save(function(err, newdata) {
             if (err) {
               return res.json({ status: 400, message: 'somethimg wnet wrong' });
             }
             sms
               .sendbytextlocal(
-                newdata.total,
+                saleData.price,
                 newdata.discount,
                 newdata.phone_number,
               )
@@ -170,7 +169,6 @@ exports.create_sale = function(req, res) {
                 });
               })
               .catch(err => {
-                console.log('error in message ', err);
                 return res.json({
                   status: 200,
                   message: 'Message sending failed',
