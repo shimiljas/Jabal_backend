@@ -37,7 +37,7 @@ app.use(function(req, res, next) {
 app.use('/admin', admin);
 app.use('/customer', customer);
 
-var port = 4120;
+var port = 3000;
 
 app.listen(port, () => {
   console.log('Server is up and running on port numner ' + port);

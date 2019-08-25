@@ -29,13 +29,27 @@ exports.create_sale = function(req, res) {
           if (saleData.discount) {
             let sum = Number(exists.total) + Number(saleData.price);
             let discount = exists.discount;
-            let balance = sum - exists.total;
-            if (balance > 0 && balance < offerData.limit) {
-              discount = exists.discount + offerData.discount;
-            } else if (balance > offerData.limit) {
-              let mulitple = Math.floor(balance / offerData.limit);
-
+            if (saleData.price > 0 && saleData.price >= offerData.limit) {
+              let mulitple = Math.floor(saleData.price / offerData.limit);
               discount = exists.discount + offerData.discount * mulitple;
+            } else if (saleData.price < offerData.limit) {
+              let reminder = exists.total % offerData.limit;
+
+              if (
+                Number(reminder) + Number(saleData.price) >=
+                offerData.limit
+              ) {
+                let remindtotal = Number(reminder) + Number(saleData.price);
+                mulitple = Math.floor(remindtotal / offerData.limit);
+                discount = exists.discount + offerData.discount * mulitple;
+              }
+            }
+
+            if (discount - saleData.discount < 0) {
+              return res.json({
+                status: 400,
+                message: 'Discount is greater than existing',
+              });
             }
 
             Customer.findOneAndUpdate(
@@ -62,7 +76,11 @@ exports.create_sale = function(req, res) {
                     message: err,
                   });
                 sms
-                  .sendbytextlocal(saleData.price, doc.discount, saleData.phone_number)
+                  .sendbytextlocal(
+                    saleData.price,
+                    doc.discount,
+                    saleData.phone_number,
+                  )
                   .then(succ => {
                     return res.json({
                       status: 200,
@@ -82,20 +100,22 @@ exports.create_sale = function(req, res) {
           } else {
             let sum = Number(exists.total) + Number(saleData.price);
             let discount = exists.discount;
-            let balance = sum - exists.total;
             let mulitple = 0;
-            if (exists.discount > 0) {
-              if (balance > 0 && balance < offerData.limit) {
-                discount = exists.discount + offerData.discount;
-              } else if (balance > offerData.limit) {
-                mulitple = Math.floor(balance / offerData.limit);
+            let balance = sum - exists.total;
+            if (saleData.price >= offerData.limit) {
+              mulitple = Math.floor(saleData.price / offerData.limit);
+              discount = exists.discount + offerData.discount * mulitple;
+            } else if (saleData.price < offerData.limit) {
+              let reminder = exists.total % offerData.limit;
 
+              if (
+                Number(reminder) + Number(saleData.price) >=
+                offerData.limit
+              ) {
+                let remindtotal = Number(reminder) + Number(saleData.price);
+                mulitple = Math.floor(remindtotal / offerData.limit);
                 discount = exists.discount + offerData.discount * mulitple;
               }
-            } else {
-              mulitple = Math.floor(sum / offerData.limit);
-
-              discount = exists.discount + offerData.discount * mulitple;
             }
 
             Customer.findOneAndUpdate(
@@ -145,6 +165,7 @@ exports.create_sale = function(req, res) {
           }
         } else {
           let mulitple = Math.floor(saleData.price / offerData.limit);
+          console.log(mulitple, 'mulitplemulitple');
           let newcustomer = Customer({
             phone_number: saleData.phone_number,
             total: saleData.price,

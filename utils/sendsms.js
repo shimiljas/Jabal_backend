@@ -32,22 +32,15 @@ exports.sendsms = (total, discount, mobile) => {
 
 exports.sendbytextlocal = (total, discount, mobile) => {
   return new Promise(function(resolve, reject) {
-    console.log(
-      total,
-      discount,
-      mobile,
-      'total, discount, mobile)total, discount, mobile)',
-    );
     setTimeout(function() {
       reject({ message: 'break' });
     }, 5000);
 
     let message =
       discount > 0
-        ? `Hi , You have compeleted a purchasing of total ${total}.00 from Jabal Mini Market  and there will be discount of ${discount}.00 on next purchase`
-        : 'You have completed a purchase of  12.00  for every 1000 get a discount of  30.00,Thank you';
+        ? `Thank you for purchasing from Jabal mini market. You have completed a purchasing of ${total}.00 rupees. Get a discount of ${discount}.00 on your next purchase.`
+        : `Thank you for purchasing from Jabal mini market.You have completed a purchasing of ${total}.00 rupees.`;
 
-    console.log(message, 'message');
     var msg = urlencode(message);
 
     var toNumber = `+91${mobile}`;
@@ -76,7 +69,6 @@ exports.sendbytextlocal = (total, discount, mobile) => {
         str += chunk;
       }); //the whole response has been recieved, so we just print it out here
       response.on('end', function() {
-        console.log('succcc');
         resolve(message);
       });
     }; //console.log('hello js'))
