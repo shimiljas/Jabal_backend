@@ -12,7 +12,7 @@ var app = express();
 // Set up mongoose connection
 var mongoose = require('mongoose');
 // var dev_db_url = 'mongodb://localhost:27017/jabal';
-var dev_db_url = 'mongodb://jabalsupermarket:jabal@super@market123@127.0.0.1:27017/jabalsupermarket';
+var dev_db_url = 'mongodb://jabalsupermarket:jabal%40super$40market123@127.0.0.1:27017/jabalsupermarket';
 var mongoDB = dev_db_url;
 mongoose.connect(mongoDB,{useNewUrlParser: true});
 mongoose.Promise = global.Promise;
