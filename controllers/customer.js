@@ -8,6 +8,7 @@ var LimitFetch = require('../utils/fetchLimit');
 //import shortid from "shortid";
 //import AWS from "aws-sdk";
 exports.create_sale = function(req, res) {
+  console.log(req.body, 'req.bodyreq.bodyreq.body');
   LimitFetch.fetchLimit()
     .then(offerData => {
       var saleData = req.body ? req.body : {};
