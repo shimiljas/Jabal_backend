@@ -11,9 +11,10 @@ var app = express();
 
 // Set up mongoose connection
 var mongoose = require('mongoose');
-var dev_db_url = 'mongodb://localhost:27017/jabal';
+// var dev_db_url = 'mongodb://localhost:27017/jabal';
+var dev_db_url = 'mongodb://jabalsupermarket:jabal@super@market123@127.0.0.1:27017/jabalsupermarket';
 var mongoDB = dev_db_url;
-mongoose.connect(mongoDB);
+mongoose.connect(mongoDB,{useNewUrlParser: true});
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -37,7 +38,7 @@ app.use(function(req, res, next) {
 app.use('/admin', admin);
 app.use('/customer', customer);
 
-var port = 3000;
+var port = 4120;
 
 app.listen(port, () => {
   console.log('Server is up and running on port numner ' + port);
