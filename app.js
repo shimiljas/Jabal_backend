@@ -11,10 +11,10 @@ var app = express();
 
 // Set up mongoose connection
 var mongoose = require('mongoose');
-// var dev_db_url = 'mongodb://localhost:27017/jabal';
-var dev_db_url = 'mongodb://jabalsupermarket:jabal%40super$40market123@127.0.0.1:27017/jabalsupermarket';
+//var dev_db_url = 'mongodb://localhost:27017/jabal';
+var dev_db_url = 'mongodb://3.15.195.238:27017/jabalsupermarket';
 var mongoDB = dev_db_url;
-mongoose.connect(mongoDB,{useNewUrlParser: true});
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -22,7 +22,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader(
     'Access-Control-Allow-Methods',
@@ -38,7 +38,7 @@ app.use(function(req, res, next) {
 app.use('/admin', admin);
 app.use('/customer', customer);
 
-var port = 4120;
+var port = 6000;
 
 app.listen(port, () => {
   console.log('Server is up and running on port numner ' + port);
