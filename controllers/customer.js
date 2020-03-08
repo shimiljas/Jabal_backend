@@ -170,6 +170,7 @@ exports.create_sale = function(req, res) {
           let newcustomer = Customer({
             phone_number: saleData.phone_number,
             total: saleData.price,
+            owned_by:saleData.owned_by,
             discount: mulitple == 0 ? 0 : mulitple * offerData.discount,
             sales: [{ price: saleData.price, date: new Date() }],
           });

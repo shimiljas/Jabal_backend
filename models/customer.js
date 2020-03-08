@@ -5,6 +5,7 @@ var CustomerSchema = new Schema({
   phone_number: { type: Number, required: true },
   total: { type: Number },
   discount: { type: Number },
+  owned_by:{ type:String,default:'shimil'},
   sales: [
     {
       price: Number,
