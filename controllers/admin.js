@@ -4,8 +4,8 @@ exports.login = function(req, res) {
   var adminData = req.body ? req.body : {};
 
   if (
-    adminData.email == 'admin@jabal.com' &&
-    adminData.password == 'admin@jabal123'
+    adminData.email == 'admin@zadi.com' &&
+    adminData.password == 'admin@123'
   ) {
     return res.json({
       code: 200,
