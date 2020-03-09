@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "async": "^2.6.1",
+    "authy": "^1.4.0",
     "aws-sdk": "^2.517.0",
     "body-parser": "^1.18.2",
     "dotenv": "^6.1.0",

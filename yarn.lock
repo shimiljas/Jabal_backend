@@ -157,6 +157,13 @@ asynckit@^0.4.0:
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
   integrity sha1-x57Zf380y48robyXkLzDZkdLS3k=
 
+authy@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/authy/-/authy-1.4.0.tgz#cab1c55b8093a8311fc16ea0ac787caac6602047"
+  integrity sha512-UnW2PxJ0W0Tu3VUzak/Pad5LOB5p5IOOdGgqsYM2BPtniEnCbBMFlZ5KDGWty0XnvUOhktXCsVio0xnXXZ9BTA==
+  dependencies:
+    request "^2.87.0"
+
 aws-sdk@^2.517.0:
   version "2.635.0"
   resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.635.0.tgz#a440e465ad44e5a982680acd3bf0747eef9f7818"
